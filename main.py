@@ -62,7 +62,7 @@ try:
         if button_state_set == 0:            
 
             if mode_index == 0 or 1: #If in Av or Tv
-                current_iso_index = ButtonActions.setISO(current_iso_index)
+                current_iso_index = ButtonActions.setISO(current_iso_index, current_fstop_index, current_sspeed_index, mode_index)
 
                 if mode_index == 0:
                     current_fstop_index = ButtonActions.setFstop(current_iso_index, current_fstop_index, current_sspeed_index, mode_index)
