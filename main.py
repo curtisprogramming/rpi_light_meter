@@ -18,8 +18,10 @@ current_iso_index = 18
 current_fstop_index = 35
 current_sspeed_index = 21
 
-LCD.lcd_display_string("Dan's Light", 1)
-LCD.lcd_display_string("Meter", 2)
+current_sspeed_index = LightSensor.getExposureIndex(current_iso_index, current_sspeed_index, current_fstop_index, mode_index)
+LCD.lcd_clear()
+LCD.lcd_display_string(str(sspeed[current_sspeed_index]) + "s f" + str(fstops[current_fstop_index]), 1)
+LCD.lcd_display_string("ISO " + str(isonum[current_iso_index]) + "   Av", 2)
 
 try:
     while True:
