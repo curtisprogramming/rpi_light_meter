@@ -4,10 +4,11 @@ from time import sleep
 import Buttons
 from CameraStops import sspeed, fstops, isonum, modes
 import LightSensor
+import json
 
 LCD = drivers.Lcd()
 
-def setISO(iso_index: int):
+def setISO(iso_index: int, fstop_index: int, sspeed_index: int, mode_index: int):
     current_iso_index = iso_index
     sleep(0.2)
     LCD.lcd_clear()
@@ -16,6 +17,7 @@ def setISO(iso_index: int):
         if GPIO.input(Buttons.setButton) == 0:
             sleep(0.2)
             LCD.lcd_clear()
+            saveSettings(current_iso_index, sspeed_index, fstop_index, mode_index)
             return current_iso_index
         if GPIO.input(Buttons.modeButton) == 0:
             current_iso_index -= 1
@@ -44,6 +46,7 @@ def setFstop(iso_index: int, fstop_index: int, sspeed_index: int, mode_index: in
             LCD.lcd_clear()
             LCD.lcd_display_string(str(sspeed[sspeed_index]) + "s f" + str(fstops[current_fstop_index]), 1)
             LCD.lcd_display_string("ISO " + str(isonum[iso_index]) + "   " + modes[mode_index], 2)
+            saveSettings(iso_index, sspeed_index, current_fstop_index, mode_index)
             return current_fstop_index
         if GPIO.input(Buttons.modeButton) == 0:
             current_fstop_index += 1
@@ -72,6 +75,7 @@ def setSspeed(iso_index: int, fstop_index: int, sspeed_index: int, mode_index: i
             LCD.lcd_clear()
             LCD.lcd_display_string(str(sspeed[current_sspeed_index]) + "s f" + str(fstops[fstop_index]), 1)
             LCD.lcd_display_string("ISO " + str(isonum[iso_index]) + "   " + modes[mode_index], 2)
+            saveSettings(iso_index, current_sspeed_index, fstop_index, mode_index)
             return current_sspeed_index
         if GPIO.input(Buttons.modeButton) == 0:
             current_sspeed_index += 1
@@ -88,4 +92,20 @@ def setSspeed(iso_index: int, fstop_index: int, sspeed_index: int, mode_index: i
             LCD.lcd_display_string(str(sspeed[current_sspeed_index]) + "s", 1)
             sleep(0.2)
 
-            
+def saveSettings(iso_index, current_sspeed_index, fstop_index, mode_index):
+    settings_dictionary = {
+        "iso_index": iso_index,
+        "aperature_index": fstop_index,
+        "shutter_speed_index": current_sspeed_index,
+        "mode_index": mode_index
+    } 
+
+    # Serializing json
+    json_object = json.dumps(settings_dictionary, indent=4)
+    
+    # Writing to sample.json
+    with open("settings.json", "w") as outfile:
+        outfile.write(json_object)
+
+
+     

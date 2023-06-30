@@ -6,17 +6,21 @@ import ButtonActions
 import Buttons
 from CameraStops import sspeed, fstops, isonum, modes
 import LightSensor
+import json
 
 Buttons.setupButtons()
 
 LCD = drivers.Lcd()
 
-mode_index = 0
-next_mode_index = 1
+settings_file = open("settings.json")
+settings_data = json.load(settings_file)
 
-current_iso_index = 18
-current_fstop_index = 35
-current_sspeed_index = 21
+mode_index = settings_data["mode_index"]
+next_mode_index = mode_index+1
+
+current_iso_index = settings_data["iso_index"]
+current_fstop_index = settings_data["aperature_index"]
+current_sspeed_index = settings_data["shutter_speed_index"]
 
 current_sspeed_index = LightSensor.getExposureIndex(current_iso_index, current_sspeed_index, current_fstop_index, mode_index)
 LCD.lcd_clear()
