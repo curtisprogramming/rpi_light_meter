@@ -7,7 +7,7 @@ apertureindex = 0
 isoindex = 0
 speedindex = 0
 
-evcorrection = 2.5                    # A stop adjustment for EV. Set using greycard and Nikond850
+evcorrection = 3                    # A stop adjustment for EV. Set using greycard and Nikond850
                                      # (additive implies a proportional relationship between brightness and lux, check maths)
 calibrationconst=15
 
