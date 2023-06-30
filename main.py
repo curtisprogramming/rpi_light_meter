@@ -11,8 +11,8 @@ Buttons.setupButtons()
 
 LCD = drivers.Lcd()
 
-mode_index = -1
-next_mode_index = 0
+mode_index = 0
+next_mode_index = 1
 
 current_iso_index = 18
 current_fstop_index = 35
