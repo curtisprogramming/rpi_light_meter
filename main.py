@@ -18,6 +18,9 @@ current_iso_index = 18
 current_fstop_index = 35
 current_sspeed_index = 21
 
+LCD.lcd_display_string("Dan's Light", 1)
+LCD.lcd_display_string("Meter", 2)
+
 try:
     while True:
         button_state_mode = GPIO.input(Buttons.modeButton)
