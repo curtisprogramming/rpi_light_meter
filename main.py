@@ -12,7 +12,7 @@ Buttons.setupButtons()
 
 LCD = drivers.Lcd()
 
-settings_file = open("settings.json")
+settings_file = open("/home/daniel/rpi_light_meter/settings.json")
 settings_data = json.load(settings_file)
 
 mode_index = settings_data["mode_index"]

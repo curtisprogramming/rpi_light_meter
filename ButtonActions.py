@@ -104,7 +104,7 @@ def saveSettings(iso_index, current_sspeed_index, fstop_index, mode_index):
     json_object = json.dumps(settings_dictionary, indent=4)
     
     # Writing to sample.json
-    with open("settings.json", "w") as outfile:
+    with open("/home/daniel/rpi_light_meter/settings.json", "w") as outfile:
         outfile.write(json_object)
 
 
